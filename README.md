@@ -31,10 +31,10 @@ Autores : Silva Gomez Juan Carlos y Rodriguez Rivera Esmeralda
 ### 👥 Equipo Multidisciplinario
 
 Este proyecto es el resultado de la colaboración entre:
-- 💻 **Desarrolladores Backend** - Arquitectura y lógica de negocio
-- 🎨 **Diseñadores UX/UI** - Experiencia de usuario
-- 📊 **Especialistas en Logística** - Flujos operativos
-- 📈 **Analistas de Datos** - Reportes y métricas
+- 💻 **Desarrolladores Backend** Peña Pedraza David
+- 🎨 **Diseñadores UX/UI** - Tlahuel Mendez Samuel Oswaldo
+- 📊 **Especialistas en Logística** - Rodriguez Rivera Esmeralda
+- 📈 **Analistas de Datos** - Silva Gomez Juan Carlos
 
 ### 🤝 Colaboradores
 
