@@ -18,6 +18,13 @@ class VarianteService {
     return !error;
   }
 
+  async getSummary() {
+    const { data, error } = await supabase.rpc("resumen_inventario_detallado")
+
+
+    return error ? null : data;
+  }
+
   async getProducts(
     sucursalId: string,
     searchTerm?: string,

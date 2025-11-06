@@ -9,9 +9,9 @@ const app = express();
 const corsOptions: CorsOptions = {
     origin: [
         "http://localhost:3000",
-        "https://synkro-frontend.vercel.app",
+        "https://synkro-psi.vercel.app",
         "http://192.168.1.99:3000",
-        
+
     ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,

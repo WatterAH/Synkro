@@ -1,4 +1,5 @@
 import { Main, Product } from "@/interfaces/Product";
+import { SummaryRequest } from "@/interfaces/Summary";
 import { request } from "@/lib/handlers";
 
 class InventoryRouter {
@@ -23,6 +24,10 @@ class InventoryRouter {
 
   async getMainProducts(): Promise<Main[]> {
     return request.get("/productos");
+  }
+
+  async getSummary(): Promise<SummaryRequest[]> {
+    return request.post("/variantes/summary", JSON.stringify({}));
   }
 
   async getSucursales(userId: string): Promise<any[]> {

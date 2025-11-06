@@ -43,6 +43,19 @@ class VarianteController {
     }
   }
 
+  async getSummary(_req: Request, res: Response) {
+    try {
+      const summary = await varianteService.getSummary();
+
+      if (!summary) {
+        return sendError(res, "Error al obtener resumen", 500);
+      }
+      return sendSuccess(res, summary);
+    } catch (error) {
+      return sendError(res, "Error al obtener resumen", 500);
+    }
+  }
+
   async getAll(req: Request, res: Response) {
     try {
       const { id } = req.params;

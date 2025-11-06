@@ -28,8 +28,7 @@ class UserController {
   async auth(req: Request, res: Response) {
     try {
       const { username, password } = req.body;
-
-      const user = await userService.getProfilByEmail(username);
+      const user = await userService.getProfilByEmail(username)
 
       if (!user) {
         return sendError(res, "Verifica tus credenciales", 401);
@@ -38,7 +37,7 @@ class UserController {
       const isValidPassword = await bcryptjs.compare(password, user.password);
 
       if (!isValidPassword) {
-        return sendError(res, "Verifica tus credenciales", 401);
+        return sendError(res, "Incorrect password", 401);
       }
 
       const token = await createAccessToken(user);

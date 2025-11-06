@@ -50,7 +50,6 @@ class UserService {
       .select("*")
       .eq("email", email)
       .single();
-
     return error ? null : data;
   }
 

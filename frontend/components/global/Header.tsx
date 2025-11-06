@@ -8,7 +8,7 @@ interface Props {
 const Header: React.FC<Props> = ({ reload }) => {
   return (
     <header className="border-b h-20 p-6 flex justify-between items-center">
-      <h1 className="text-3xl font-bold font-inter">Inventario</h1>
+      <h1 className="text-3xl md:text-4xl font-bold text-pretty">Inventario</h1>
       <Create reload={reload} />
     </header>
   );

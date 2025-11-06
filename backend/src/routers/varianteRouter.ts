@@ -11,6 +11,7 @@ varianteRouter.get("/:id", varianteController.getAll);
 varianteRouter.get("/product/:product_id", varianteController.getByProductId);
 varianteRouter.get("/sku/:sku", varianteController.getBySku);
 varianteRouter.get("/barcode/:barcode", varianteController.getByBarcode);
+varianteRouter.post("/summary", varianteController.getSummary);
 
 // Update
 varianteRouter.patch("/:id", varianteController.update);
