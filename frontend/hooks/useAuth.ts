@@ -48,7 +48,8 @@ export const useCheckToken = () => {
         const user = await sessionRouter.checkAuthToken(cookies.token);
         login(user.user);
         return;
-      } catch (_error) {
+      } catch (error) {
+        console.log(error);
         return router.push("/auth");
       } finally {
         setLoading(false);

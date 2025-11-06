@@ -9,7 +9,7 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Footprints, Layers2, Lock, UserRound } from "lucide-react";
+import { Footprints, Lock, UserRound } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks/useAuth";
 

@@ -21,22 +21,22 @@ const Sucursales: React.FC<Props> = ({ sucursalId, setSucursalId }) => {
   const [value, setValue] = useState(sucursalId == null ? "all" : sucursalId);
   const [data, setData] = useState<any[]>([]);
 
-  async function getSucursales() {
-    try {
-      const result = await inventoryRouter.getSucursales(user.id);
-      setData(result);
-    } catch (error: any) {
-      toast.error(error.message);
-    }
-  }
-
   function handleClick(value: string) {
     setValue(value);
     setSucursalId(value as any);
   }
 
   useEffect(() => {
-    if (!user.id) return;
+    async function getSucursales() {
+      if (!user.id) return;
+      try {
+        const result = await inventoryRouter.getSucursales(user.id);
+        setData(result);
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    }
+
     getSucursales();
   }, [user.id]);
 

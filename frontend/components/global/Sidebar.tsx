@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { ChevronDown, Footprints, Layers2 } from "lucide-react";
+import { ChevronDown, Footprints } from "lucide-react";
 import { useMenu } from "@/hooks/useMenu";
 import {
   Collapsible,

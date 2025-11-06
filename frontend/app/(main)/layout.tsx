@@ -47,8 +47,7 @@ export default function RootLayout({
         <div className="w-full space-y-0">{children}</div>
       </SidebarProvider>
 
-      {/* Watson Assistant Chatbot */}
-      {/* <Script id="watson-chat" strategy="afterInteractive">
+      <Script id="watson-chat" strategy="afterInteractive">
         {`
             window.watsonAssistantChatOptions = {
               integrationID: "6cc136ab-c67a-422e-9ccd-621a9dc96a42",
@@ -64,7 +63,7 @@ export default function RootLayout({
               document.head.appendChild(t);
             });
           `}
-      </Script> */}
+      </Script>
     </main>
   );
 }

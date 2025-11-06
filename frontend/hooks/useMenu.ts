@@ -1,18 +1,6 @@
 import { useUser } from "@/context/UserContext";
 
-import {
-  ArrowUpDown,
-  Boxes,
-  FileText,
-  Home,
-  LogOut,
-  LucideIcon,
-  MonitorCog,
-  Package,
-  PencilRuler,
-  UserRound,
-  UsersRound,
-} from "lucide-react";
+import { ArrowUpDown, Boxes, LogOut, LucideIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCookies } from "react-cookie";
 
@@ -44,7 +32,7 @@ type CollapsibleItem = {
 };
 
 export const useMenu = () => {
-  const { user, logout } = useUser();
+  const { logout } = useUser();
   const [, , removeCookie] = useCookies();
   const router = useRouter();
 
