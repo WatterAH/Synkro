@@ -9,6 +9,9 @@
 
 Este sistema fue desarrollado como parte del **Hackathon de Logística** enfocado en mejorar las operaciones de **Calzando a México**, una iniciativa que busca impulsar la industria del calzado nacional. El proyecto integra tecnología de **IBM Watson** para crear una solución completa de gestión de inventario multi-sucursal.
 
+## VIDEO
+[Video de presentación](https://youtu.be/XiX7mWga5OU)
+
 ## Logistica Archivos y diagramas 
 
 [ANALISIS DE CAUSA RAIZ.pdf](https://github.com/user-attachments/files/23400863/ANALISIS.DE.CAUSA.RAIZ.pdf)
