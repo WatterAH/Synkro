@@ -7,9 +7,9 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 type UseDataTableProps<T, F = Record<string, any>> = {
-  sucursalId: string;
+  sucursalId: number | null;
   columns: ColumnDef<T, any>[];
-  fetcher: (sucursalId: string, filters?: F) => Promise<T[]>;
+  fetcher: (sucursalId: number | null, filters?: F) => Promise<T[]>;
   canExpand?: boolean;
   limit?: number;
   initialData?: T[];
@@ -53,8 +53,6 @@ export function useTable<T, F = Record<string, any>>({
   });
 
   const fetchData = async () => {
-    if (!sucursalId) return;
-
     try {
       setLoading(true);
       const result = await fetcher(sucursalId, filters);
@@ -73,8 +71,6 @@ export function useTable<T, F = Record<string, any>>({
       isFirstRender.current = false;
       return;
     }
-
-    if (!sucursalId) return;
 
     fetchData();
   }, [sucursalId, filters, refreshKey]);

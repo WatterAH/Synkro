@@ -21,10 +21,12 @@ import { Product } from "@/interfaces/Product";
 import SelectTypes from "@/components/inventario/SelectTypes";
 import SelectColor from "@/components/inventario/SelectColor";
 import Header from "@/components/global/Header";
+import { useUser } from "@/context/UserContext";
 
 export default function Page() {
+  const { user } = useUser();
   const columns = InventoryColumns;
-  const [sucursalId, setSucursalId] = useState("all");
+  const [sucursalId, setSucursalId] = useState(user.sucursal_id);
   const [searchInput, setSearchInput] = useState("");
   const debouncedSearch = useDebounce(searchInput, 500);
 
@@ -69,7 +71,7 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="flex-1">
+      <div className="flex flex-col justify-between h-[calc(100vh-12rem)]">
         <Table className="overflow-auto border-t">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -78,7 +80,7 @@ export default function Page() {
                   return (
                     <TableHead
                       key={header.id}
-                      className="p-5 font-inter text-muted-foreground bg-muted"
+                      className="p-5 font-inter text-muted-foreground"
                     >
                       {header.isPlaceholder
                         ? null
@@ -111,7 +113,9 @@ export default function Page() {
                       style={{
                         width: cell.column.getSize(),
                       }}
-                      className="p-5 font-inter text-xs"
+                      className={`p-5 font-inter text-xs ${
+                        row.original.sucursal_id == null && "bg-cyan-600/20"
+                      }`}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -133,6 +137,10 @@ export default function Page() {
             )}
           </TableBody>
         </Table>
+        <div className="w-full flex justify-end items-center gap-2 px-4">
+          <div className="bg-cyan-600/20 p-3 rounded-full" />
+          <p className="font-inter">Productos en almacen</p>
+        </div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ export interface Product {
   color: string;
   tipo: string;
   product_id: string;
-  sucursal_id: string | null;
+  sucursal_id: number | null;
   cantidad: number;
   variante: string;
   product: {

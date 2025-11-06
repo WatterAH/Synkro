@@ -3,7 +3,7 @@ import { request } from "@/lib/handlers";
 
 class InventoryRouter {
   async getProducts(
-    sucursalId: string,
+    sucursalId: number | null,
     filters?: { searchTerm?: string; category: string; color: string }
   ): Promise<Product[]> {
     let url = `/variantes/${sucursalId}?limit=100`;
@@ -25,8 +25,8 @@ class InventoryRouter {
     return request.get("/productos");
   }
 
-  async getSucursales(): Promise<any[]> {
-    return request.get("/sucursales");
+  async getSucursales(userId: string): Promise<any[]> {
+    return request.get(`/sucursales?userId=${userId}`);
   }
 
   async create(data: Partial<Product>): Promise<Product[]> {

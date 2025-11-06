@@ -66,7 +66,6 @@ const Create: React.FC<Props> = ({ reload }) => {
     const p = data.find((d) => d.id === form.getValues("product_id"));
     if (p) {
       form.setValue("tipo", p.sku_base.slice(0, 1));
-      console.log(p.sku_base.slice(1, 4));
       form.setValue("variante", p.sku_base.slice(1, 4));
     }
   }, [form.watch("product_id")]);

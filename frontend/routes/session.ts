@@ -9,7 +9,7 @@ class SessionRouter {
     return request.post("/users/auth", JSON.stringify({ username, password }));
   }
 
-  async checkAuthToken(token: string): Promise<User> {
+  async checkAuthToken(token: string): Promise<{ user: User; token: string }> {
     return request.post("/users/check-token", JSON.stringify({ token }));
   }
 }
