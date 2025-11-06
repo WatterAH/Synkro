@@ -4,7 +4,6 @@ import { Variante } from "../interfaces/Variante";
 import { sendError, sendSuccess } from "../libs/responseHandler";
 import loteService from "../service/loteService";
 
-
 class VarianteController {
   async create(req: Request, res: Response) {
     try {
@@ -13,9 +12,18 @@ class VarianteController {
       const lote = await loteService.getByNumeroLote();
       let numlote = lote ? lote.num + 1 : 1;
 
-      const sku = `${data.tipo}${data.variante}-L${numlote}${data.color}${data.talla}`
+      const sku = `${data.tipo}${data.variante}-L${numlote}${data.color}${data.talla}`;
 
-      const inserdata = { product_id: data.product_id, sku, talla: data.talla, barcode: data.barcode, color: data.color, sucursal_id: data.sucursal_id, tipo: data.tipo, cantidad: 180};
+      const inserdata = {
+        product_id: data.product_id,
+        sku,
+        talla: data.talla,
+        barcode: data.barcode,
+        color: data.color,
+        sucursal_id: data.sucursal_id,
+        tipo: data.tipo,
+        cantidad: 180,
+      };
 
       const variante = await varianteService.create(inserdata);
 
@@ -23,8 +31,11 @@ class VarianteController {
         return sendError(res, "Error al crear variante", 500);
       }
 
-      await loteService.create({ variante_id: variante.id, precio_compra: 72000 as number, estado: "Excelente" });
-
+      await loteService.create({
+        variante_id: variante.id,
+        precio_compra: 72000 as number,
+        estado: "Excelente",
+      });
 
       return sendSuccess(res, true);
     } catch (error: any) {
@@ -40,7 +51,7 @@ class VarianteController {
       const color = req.query.color as string | undefined;
 
       const products = await varianteService.getProducts(
-        id,
+        id == "null" ? "all" : id,
         search,
         category,
         color
@@ -49,7 +60,6 @@ class VarianteController {
       if (!products) {
         return sendError(res, "Error al obtener productos", 500);
       }
-
 
       return sendSuccess(res, products);
     } catch (error: any) {

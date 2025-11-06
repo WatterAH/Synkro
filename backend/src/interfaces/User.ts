@@ -4,4 +4,5 @@ export interface User {
   name: string;
   password: string;
   created_at: string;
+  sucursal_id: number | null;
 }

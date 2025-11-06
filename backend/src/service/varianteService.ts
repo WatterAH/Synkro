@@ -42,7 +42,6 @@ class VarianteService {
     }
 
     const { data, error } = await query;
-    console.log(error);
 
     return error ? null : data;
   }

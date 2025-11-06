@@ -2,22 +2,18 @@ import { Lote } from "../interfaces/Lote";
 import { supabase } from "../middlewares/connection";
 
 class LoteService {
-
   async create(lote: Partial<Lote>): Promise<Lote | null> {
     const { data, error } = await supabase
       .from("lotes")
       .insert([lote])
-      .select('*')
+      .select("*")
       .single();
-    console.log(error)
+
     return error ? null : data;
   }
 
   async delete(num: string): Promise<boolean> {
-    const { error } = await supabase
-      .from("lotes")
-      .delete()
-      .eq("num", num);
+    const { error } = await supabase.from("lotes").delete().eq("num", num);
 
     return !error;
   }
@@ -47,7 +43,7 @@ class LoteService {
     const { data, error } = await supabase
       .from("lotes")
       .select("*")
-      .order('fecha_entrada', { ascending: false });
+      .order("fecha_entrada", { ascending: false });
 
     return error ? [] : data;
   }
@@ -57,8 +53,9 @@ class LoteService {
       .from("lotes")
       .select("*")
       .eq("variante_num", variante_num)
-      .order('create_at', { ascending: false })
-      .limit(1).single();
+      .order("create_at", { ascending: false })
+      .limit(1)
+      .single();
 
     return error ? [] : data;
   }
@@ -67,11 +64,9 @@ class LoteService {
     const { data, error } = await supabase
       .from("lotes")
       .select("*")
-      .order('num', { ascending: false })
+      .order("num", { ascending: false })
       .limit(1)
       .single();
-
-    console.log(error)
 
     return error ? null : data;
   }
@@ -81,7 +76,7 @@ class LoteService {
       .from("lotes")
       .select("*")
       .eq("estado", estado)
-      .order('fecha_entrada', { ascending: false });
+      .order("fecha_entrada", { ascending: false });
 
     return error ? [] : data;
   }
@@ -91,7 +86,7 @@ class LoteService {
       .from("lotes")
       .select("*")
       .eq("proveedor", proveedor)
-      .order('fecha_entrada', { ascending: false });
+      .order("fecha_entrada", { ascending: false });
 
     return error ? [] : data;
   }
@@ -103,10 +98,10 @@ class LoteService {
     const { data, error } = await supabase
       .from("lotes")
       .select("*")
-      .not('fecha_vencimiento', 'is', null)
-      .lte('fecha_vencimiento', fechaLimite.toISOString())
-      .eq('estado', 'activo')
-      .order('fecha_vencimiento', { ascending: true });
+      .not("fecha_vencimiento", "is", null)
+      .lte("fecha_vencimiento", fechaLimite.toISOString())
+      .eq("estado", "activo")
+      .order("fecha_vencimiento", { ascending: true });
 
     return error ? [] : data;
   }
@@ -117,10 +112,10 @@ class LoteService {
     const { data, error } = await supabase
       .from("lotes")
       .select("*")
-      .not('fecha_vencimiento', 'is', null)
-      .lt('fecha_vencimiento', fechaActual)
-      .eq('estado', 'activo')
-      .order('fecha_vencimiento', { ascending: true });
+      .not("fecha_vencimiento", "is", null)
+      .lt("fecha_vencimiento", fechaActual)
+      .eq("estado", "activo")
+      .order("fecha_vencimiento", { ascending: true });
 
     return error ? [] : data;
   }
@@ -128,14 +123,16 @@ class LoteService {
   async getLotesConRelaciones(): Promise<any[]> {
     const { data, error } = await supabase
       .from("lotes")
-      .select(`
+      .select(
+        `
         *,
         variantes (
           *,
           productos (*)
         )
-      `)
-      .order('fecha_entrada', { ascending: false });
+      `
+      )
+      .order("fecha_entrada", { ascending: false });
 
     return error ? [] : data;
   }
@@ -150,7 +147,6 @@ class LoteService {
 
     return error ? null : data;
   }
-
 }
 
 export default new LoteService();

@@ -2,37 +2,35 @@ import { Sucursal } from "../interfaces/Sucursal";
 import { supabase } from "../middlewares/connection";
 
 class SucursalService {
-
   async create(sucursal: Sucursal): Promise<Sucursal | null> {
     const { data, error } = await supabase
       .from("sucursales")
       .insert(sucursal)
-      .select('*')
+      .select("*")
       .single();
 
     return error ? null : data;
   }
 
   async delete(id: number): Promise<boolean> {
-    const { error } = await supabase
-      .from("sucursales")
-      .delete()
-      .eq("id", id);
+    const { error } = await supabase.from("sucursales").delete().eq("id", id);
 
     return !error;
   }
 
-  async getById(id: number): Promise<Sucursal | null> {
+  async getById(id: number): Promise<Sucursal[] | null> {
     const { data, error } = await supabase
       .from("sucursales")
       .select("*")
-      .eq("id", id)
-      .single();
+      .eq("id", id);
 
     return error ? null : data;
   }
 
-  async update(id: number, sucursal: Partial<Sucursal>): Promise<Sucursal | null> {
+  async update(
+    id: number,
+    sucursal: Partial<Sucursal>
+  ): Promise<Sucursal | null> {
     const { data, error } = await supabase
       .from("sucursales")
       .update(sucursal)
@@ -44,9 +42,7 @@ class SucursalService {
   }
 
   async getAll(): Promise<Sucursal[]> {
-    const { data, error } = await supabase
-      .from("sucursales")
-      .select("*");
+    const { data, error } = await supabase.from("sucursales").select("*");
 
     return error ? [] : data;
   }
@@ -60,7 +56,6 @@ class SucursalService {
 
     return error ? null : data;
   }
-
 }
 
 export default new SucursalService();
