@@ -23,7 +23,7 @@ Este sistema fue desarrollado como parte del **Hackathon de Logística** enfocad
 
 [Synkro_Pitch.pdf](https://github.com/user-attachments/files/23400908/Synkro_Pitch.pdf)
 
-
+Autores : Silva Gomez Juan Carlos y Rodriguez Rivera Esmeralda
 
 ### 👥 Equipo Multidisciplinario
 
