@@ -7,8 +7,12 @@ class VarianteController {
   async create(req: Request, res: Response) {
     try {
       const data: Variante = req.body;
+      const sku = data.sku;
 
-      const variante = await varianteService.create(data);
+
+      const inserdata = { product_id: data.product_id, sku: data.sku, talla: data.talla, barcode: data.barcode, color: data.color, sucursal_id: data.sucursal_id, tipo: data.tipo };
+
+      const variante = await varianteService.create(inserdata);
 
       if (!variante) {
         return sendError(res, "Error al crear variante", 500);

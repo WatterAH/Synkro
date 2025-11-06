@@ -57,6 +57,7 @@ class UserController {
         try {
             const { token } = req.body;
             const user = await validateToken(token);
+            
             if (!user) {
                 return sendError(res, "Unauthorized", 401);
             }

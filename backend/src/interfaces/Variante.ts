@@ -5,5 +5,7 @@ export interface Variante {
   sku: string;
   talla: string;
   barcode: string;
-  purchase_price: any; // jsonb puede ser array u objeto
+  color: string;
+  sucursal_id: string;
+  tipo: string;
 }

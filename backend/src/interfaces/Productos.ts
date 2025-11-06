@@ -3,5 +3,4 @@ export interface Producto {
   created_at?: string;
   sku_base: string;
   name: string;
-  category: string;
 }
