@@ -32,7 +32,7 @@ type CollapsibleItem = {
 };
 
 export const useMenu = () => {
-  const { logout } = useUser();
+  const { user, logout } = useUser();
   const [, , removeCookie] = useCookies();
   const router = useRouter();
 
@@ -43,12 +43,12 @@ export const useMenu = () => {
   }
 
   const items: (MenuItem | null)[] = [
-    {
+    user.sucursal_id == null ? {
       type: "item",
       title: "Inicio",
       url: "/home",
       icon: Home,
-    }, {
+    } : null, {
       type: "item",
       title: "Inventario",
       url: "/inventario",
@@ -63,13 +63,13 @@ export const useMenu = () => {
     {
       type: "item",
       url: "",
-      title: "Proximamente...",
+      title: "Muy pronto...",
       icon: Plane,
     },
     {
       type: "item",
       url: "",
-      title: "Proximamente...",
+      title: "Ya casi...",
       icon: Wrench,
     },
     {

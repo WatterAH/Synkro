@@ -36,7 +36,7 @@ export const useAuth = () => {
 
 export const useCheckToken = () => {
   const router = useRouter();
-  const { login } = useUser();
+  const { user, login } = useUser();
   const [cookies] = useCookies();
   const [loading, setLoading] = useState(true);
 
@@ -47,7 +47,12 @@ export const useCheckToken = () => {
       try {
         const user = await sessionRouter.checkAuthToken(cookies.token);
         login(user.user);
-        return;
+
+        if (user.user.sucursal_id == null) {
+          return router.push("/home");
+        } else {
+          return router.push("/inventario");
+        }
       } catch (error) {
         console.log(error);
         return router.push("/auth");

@@ -19,8 +19,7 @@ class VarianteService {
   }
 
   async getSummary() {
-    const { data, error } = await supabase.rpc("resumen_inventario_detallado")
-
+    const { data, error } = await supabase.rpc("resumen_inventario_detallado");
 
     return error ? null : data;
   }
