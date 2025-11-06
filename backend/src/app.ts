@@ -1,21 +1,10 @@
-import express, { Express } from "express";
-import cors, { CorsOptions } from "cors";
-import { imports } from "./middlewares/routesConfig";
+import express from "express";
+import { config } from "./middlewares/config";
+import { mainRouter } from "./middlewares/mainRouter";
 
-const app: Express = express();
+const app = express();
 
-// Configuring CORS options to allow requests from the provided URLs.
-const corsOptions: CorsOptions = {
-  origin: ["http://localhost"],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-  optionsSuccessStatus: 204,
-};
-app.use("*", cors(corsOptions));
-
-// Enabling the middleware to parse request bodies as JSON.
-app.use(express.json());
-
-app.use(imports);
+app.use(config)
+app.use(mainRouter)
 
 export { app };
