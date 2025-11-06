@@ -39,8 +39,8 @@ export default function Page() {
       try {
         const result = await inventoryRouter.getSummary();
         setSummary(result);
-        console.log(result);
-      } catch (_error) {
+      } catch (error) {
+        console.log(error)
         toast.error("Error al obtener el resumen de inventario");
       }
     }
