@@ -8,4 +8,5 @@ export interface Variante {
   color: string;
   sucursal_id: string;
   tipo: string;
+  variante: string;
 }

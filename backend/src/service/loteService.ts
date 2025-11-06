@@ -3,40 +3,40 @@ import { supabase } from "../middlewares/connection";
 
 class LoteService {
 
-  async create(lote: Lote): Promise<Lote | null> {
+  async create(lote: Partial<Lote>): Promise<Lote | null> {
     const { data, error } = await supabase
       .from("lotes")
       .insert([lote])
       .select('*')
       .single();
-
+    console.log(error)
     return error ? null : data;
   }
 
-  async delete(id: string): Promise<boolean> {
+  async delete(num: string): Promise<boolean> {
     const { error } = await supabase
       .from("lotes")
       .delete()
-      .eq("id", id);
+      .eq("num", num);
 
     return !error;
   }
 
-  async getById(id: string): Promise<Lote | null> {
+  async getBynum(num: string): Promise<Lote | null> {
     const { data, error } = await supabase
       .from("lotes")
       .select("*")
-      .eq("id", id)
+      .eq("num", num)
       .single();
 
     return error ? null : data;
   }
 
-  async update(id: string, lote: Partial<Lote>): Promise<Lote | null> {
+  async update(num: string, lote: Partial<Lote>): Promise<Lote | null> {
     const { data, error } = await supabase
       .from("lotes")
       .update(lote)
-      .eq("id", id)
+      .eq("num", num)
       .select("*")
       .single();
 
@@ -52,22 +52,26 @@ class LoteService {
     return error ? [] : data;
   }
 
-  async getByVarianteId(variante_id: string): Promise<Lote[]> {
+  async getByVariantenum(variante_num: string): Promise<Lote[]> {
     const { data, error } = await supabase
       .from("lotes")
       .select("*")
-      .eq("variante_id", variante_id)
-      .order('fecha_entrada', { ascending: false });
+      .eq("variante_num", variante_num)
+      .order('create_at', { ascending: false })
+      .limit(1).single();
 
     return error ? [] : data;
   }
 
-  async getByNumeroLote(numero_lote: string): Promise<Lote | null> {
+  async getByNumeroLote(): Promise<Lote | null> {
     const { data, error } = await supabase
       .from("lotes")
       .select("*")
-      .eq("numero_lote", numero_lote)
+      .order('num', { ascending: false })
+      .limit(1)
       .single();
+
+    console.log(error)
 
     return error ? null : data;
   }
@@ -107,7 +111,7 @@ class LoteService {
     return error ? [] : data;
   }
 
-  async getLotesVencidos(): Promise<Lote[]> {
+  async getLotesVencnumos(): Promise<Lote[]> {
     const fechaActual = new Date().toISOString();
 
     const { data, error } = await supabase
@@ -136,11 +140,11 @@ class LoteService {
     return error ? [] : data;
   }
 
-  async cambiarEstado(id: string, nuevoEstado: string): Promise<Lote | null> {
+  async cambiarEstado(num: string, nuevoEstado: string): Promise<Lote | null> {
     const { data, error } = await supabase
       .from("lotes")
       .update({ estado: nuevoEstado })
-      .eq("id", id)
+      .eq("num", num)
       .select("*")
       .single();
 

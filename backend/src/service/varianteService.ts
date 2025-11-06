@@ -2,7 +2,7 @@ import { Variante } from "../interfaces/Variante";
 import { supabase } from "../middlewares/connection";
 
 class VarianteService {
-  async create(variante: Variante): Promise<Partial<Variante> | null> {
+  async create(variante: Partial<Variante>): Promise<Partial<Variante> | null> {
     const { data, error } = await supabase
       .from("variantes")
       .insert([variante])
@@ -42,6 +42,7 @@ class VarianteService {
     }
 
     const { data, error } = await query;
+    console.log(error);
 
     return error ? null : data;
   }

@@ -2,15 +2,20 @@ import { Request, Response } from "express";
 import varianteService from "../service/varianteService";
 import { Variante } from "../interfaces/Variante";
 import { sendError, sendSuccess } from "../libs/responseHandler";
+import loteService from "../service/loteService";
+
 
 class VarianteController {
   async create(req: Request, res: Response) {
     try {
       const data: Variante = req.body;
-      const sku = data.sku;
 
+      const lote = await loteService.getByNumeroLote();
+      let numlote = lote ? lote.num + 1 : 1;
 
-      const inserdata = { product_id: data.product_id, sku: data.sku, talla: data.talla, barcode: data.barcode, color: data.color, sucursal_id: data.sucursal_id, tipo: data.tipo };
+      const sku = `${data.tipo}${data.variante}-L${numlote}${data.color}${data.talla}`
+
+      const inserdata = { product_id: data.product_id, sku, talla: data.talla, barcode: data.barcode, color: data.color, sucursal_id: data.sucursal_id, tipo: data.tipo, cantidad: 180};
 
       const variante = await varianteService.create(inserdata);
 
@@ -18,7 +23,10 @@ class VarianteController {
         return sendError(res, "Error al crear variante", 500);
       }
 
-      return sendSuccess(res, variante);
+      await loteService.create({ variante_id: variante.id, precio_compra: 72000 as number, estado: "Excelente" });
+
+
+      return sendSuccess(res, true);
     } catch (error: any) {
       return sendError(res, error.message, 500);
     }
@@ -37,6 +45,12 @@ class VarianteController {
         category,
         color
       );
+
+      if (!products) {
+        return sendError(res, "Error al obtener productos", 500);
+      }
+
+
       return sendSuccess(res, products);
     } catch (error: any) {
       return sendError(res, error.message, 500);

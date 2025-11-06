@@ -26,7 +26,7 @@ class LoteController {
         try {
             const { id } = req.params;
 
-            const lote = await loteService.getById(id);
+            const lote = await loteService.getBynum(id);
 
             if (!lote) {
                 return sendError(res, "Lote no encontrado", 404);
@@ -51,28 +51,13 @@ class LoteController {
         try {
             const { variante_id } = req.params;
 
-            const lotes = await loteService.getByVarianteId(variante_id);
+            const lotes = await loteService.getByVariantenum(variante_id);
             return sendSuccess(res, lotes);
         } catch (error: any) {
             return sendError(res, error.message, 500);
         }
     }
 
-    async getByNumeroLote(req: Request, res: Response) {
-        try {
-            const { numero_lote } = req.params;
-
-            const lote = await loteService.getByNumeroLote(numero_lote);
-
-            if (!lote) {
-                return sendError(res, "Lote no encontrado", 404);
-            }
-
-            return sendSuccess(res, lote);
-        } catch (error: any) {
-            return sendError(res, error.message, 500);
-        }
-    }
 
     async getByEstado(req: Request, res: Response) {
         try {

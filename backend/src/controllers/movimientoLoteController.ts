@@ -47,16 +47,6 @@ class MovimientoLoteController {
         }
     }
 
-    async getByLoteId(req: Request, res: Response) {
-        try {
-            const { lote_id } = req.params;
-
-            const movimientos = await movimientoLoteService.getByLoteId(lote_id);
-            return sendSuccess(res, movimientos);
-        } catch (error: any) {
-            return sendError(res, error.message, 500);
-        }
-    }
 
     async getByTipoMovimiento(req: Request, res: Response) {
         try {
@@ -80,43 +70,10 @@ class MovimientoLoteController {
         }
     }
 
-    async getByReferencia(req: Request, res: Response) {
-        try {
-            const { referencia } = req.params;
 
-            const movimientos = await movimientoLoteService.getByReferencia(referencia);
-            return sendSuccess(res, movimientos);
-        } catch (error: any) {
-            return sendError(res, error.message, 500);
-        }
-    }
 
-    async getMovimientosConRelaciones(_req: Request, res: Response) {
-        try {
-            const movimientos = await movimientoLoteService.getMovimientosConRelaciones();
-            return sendSuccess(res, movimientos);
-        } catch (error: any) {
-            return sendError(res, error.message, 500);
-        }
-    }
 
-    async getMovimientosPorFecha(req: Request, res: Response) {
-        try {
-            const { fecha_inicio, fecha_fin } = req.query;
 
-            if (!fecha_inicio || !fecha_fin) {
-                return sendError(res, "Se requiere fecha_inicio y fecha_fin", 400);
-            }
-
-            const movimientos = await movimientoLoteService.getMovimientosPorFecha(
-                fecha_inicio as string,
-                fecha_fin as string
-            );
-            return sendSuccess(res, movimientos);
-        } catch (error: any) {
-            return sendError(res, error.message, 500);
-        }
-    }
 
     async getUltimosMovimientos(req: Request, res: Response) {
         try {
@@ -130,14 +87,7 @@ class MovimientoLoteController {
         }
     }
 
-    async getEstadisticasPorTipo(_req: Request, res: Response) {
-        try {
-            const estadisticas = await movimientoLoteService.getEstadisticasPorTipo();
-            return sendSuccess(res, estadisticas);
-        } catch (error: any) {
-            return sendError(res, error.message, 500);
-        }
-    }
+ 
 
     async registrarMovimiento(req: Request, res: Response) {
         try {
@@ -158,10 +108,6 @@ class MovimientoLoteController {
             const movimiento = await movimientoLoteService.registrarMovimiento(
                 lote_id,
                 tipo_movimiento,
-                cantidad,
-                cantidad_anterior,
-                usuario_id,
-                referencia,
                 nota
             );
 
